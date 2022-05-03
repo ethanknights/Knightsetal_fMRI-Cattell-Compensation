@@ -57,10 +57,10 @@ setwd('R')
 source('loadData.R')
 
 #For interaction: Bhv ~ age * gender
-source('plot_bhv_2separate_withGenderInteraction.R')
+source('plot_bhv.R')
 
 #For interaction: Activation ~ age * bhv
-source('plot_ROI_noZscore.R')
+source('plot_ROI.R')
 ```
 
 ![Cuneal-UnivariateInteraction](./R/lSPOCBYbhv_withAgeTert.png)
