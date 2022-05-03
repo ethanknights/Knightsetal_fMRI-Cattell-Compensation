@@ -44,7 +44,7 @@ This repository contains code accompanying the multivariate Bayesian machine-lea
 ## 1) Whole-brain Univariate Analysis
 Use matlab to run fMRI preprocessing and generate the group univariate contrasts (i.e., second level model generation, TFCE correction, ROI definition and timeseries extraction):<br>
 ```c
-ccc_pipeline_20211203_ek.m
+pipeline.m
 
 /* Alternatively, download the summary datasets described earlier the Prerequisties section.
 ```
