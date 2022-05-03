@@ -1,4 +1,4 @@
-%% NVM Extract ROI (by recyling HAROLD project code)
+%% Extract ROIs
 %% ------------------------------------------------------------------------
 
 path2data = '/imaging/camcan/sandbox/kt03/projects/collabs/ethanK/ccc'; 
