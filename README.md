@@ -56,11 +56,11 @@ In R, generate the regression models & plots:
 setwd('R')
 source('loadData.R')
 
-#For interaction: Bhv ~ age * activation
-source('plot_ROI.R')
-
 #For interaction: Bhv ~ age * gender
 source('plot_bhv_2separate_withGenderInteraction.R')
+
+#For interaction: Activation ~ age * bhv
+source('plot_ROI_noZscore.R')
 ```
 
 ![Cuneal-UnivariateInteraction](./R/lSPOCBYbhv_withAgeTert.png)
