@@ -30,39 +30,39 @@ VOI.frontal = tmpD';
 
 
 
-%% multiple Regression with KT function
-%% ------------------------------------------------------------------------
-Ttemp    = [T VOI];
-namevoi = VOI.Properties.VariableNames;
-
-for ivoi = 1:numel(namevoi)
-    model   = namevoi{ivoi};
-    model   = [model '~PC6*Age+GenderNum+handedness'];
-    varnames = strsplit(model,{'~','+','*'});
-    tbl     = Ttemp(:,varnames);
-    %tbl     = normalize(tbl);
-    tbl.PC6 = normalize(tbl.PC6);
-    tbl.Age = normalize(tbl.Age);
-    tbl.GenderNum = normalize(tbl.GenderNum);
-    tbl.handedness = normalize(tbl.handedness);
-    mlr     = fitlm(tbl,model); %mlr = fitlm(tbl,model,'RobustOpts',1);
-    
-    
-    % Visualisation of interaction
-    labels      = [];
-    labels.Y    = namevoi{ivoi};
-    labels.X    = 'PC6'; % 'ASL' 'Performance'
-    labels.Z    = 'Age';
-    labels.zH   = 'Old';
-    labels.zM   = 'Mid';
-    labels.zL   = 'Young';
-    cfg         = [];
-    cfg.tbl     = tbl;
-    cfg.labels  = labels;
-    cfg.model   = model;
-    %kat_plotting_interaction_2way(cfg);
-    kat_plotting_interaction_2way_ek(cfg);
-end
+% %% multiple Regression with KT function
+% %% ------------------------------------------------------------------------
+% Ttemp    = [T VOI];
+% namevoi = VOI.Properties.VariableNames;
+% 
+% for ivoi = 1:numel(namevoi)
+%     model   = namevoi{ivoi};
+%     model   = [model '~PC6*Age+GenderNum+handedness'];
+%     varnames = strsplit(model,{'~','+','*'});
+%     tbl     = Ttemp(:,varnames);
+%     %tbl     = normalize(tbl);
+%     tbl.PC6 = normalize(tbl.PC6);
+%     tbl.Age = normalize(tbl.Age);
+%     tbl.GenderNum = normalize(tbl.GenderNum);
+%     tbl.handedness = normalize(tbl.handedness);
+%     mlr     = fitlm(tbl,model); %mlr = fitlm(tbl,model,'RobustOpts',1);
+%     
+%     
+%     % Visualisation of interaction
+%     labels      = [];
+%     labels.Y    = namevoi{ivoi};
+%     labels.X    = 'PC6'; % 'ASL' 'Performance'
+%     labels.Z    = 'Age';
+%     labels.zH   = 'Old';
+%     labels.zM   = 'Mid';
+%     labels.zL   = 'Young';
+%     cfg         = [];
+%     cfg.tbl     = tbl;
+%     cfg.labels  = labels;
+%     cfg.model   = model;
+%     %kat_plotting_interaction_2way(cfg);
+%     kat_plotting_interaction_2way_ek(cfg);
+% end
 
 %% look at ROI
 % addpath /imaging/henson/users/ek03/toolbox/BrainNetViewer_20191031

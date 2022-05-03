@@ -24,7 +24,7 @@ This repository contains code accompanying the multivariate Bayesian machine-lea
  
 ## Datasets
 - For performing Multivariate Bayes and the preceding whole-brain univariate analysis (e.g. generating second-level models, defining ROIs, extracting timeseries), download the  Cattell first-level model images derived from automatic analysis (see Taylor et al. 2017 NeuroImage) by submitting a Cam-CAN data-request: <br>```https://camcan-archive.mrc-cbu.cam.ac.uk/dataaccess``` <br><br>
-- For hypothesis testing in R, download and extract the summary datasets from:
+- For hypothesis testing in R, download & extract the summary datasets from:
 ```https://osf.io/v7kmh/```
     - Then move data to the 3 corresponding analysis directories:
         ```bash
@@ -86,10 +86,11 @@ In R, generate the logistic regression models & plots for the ROI datasets indep
 setwd('./MVB/R/dropMVBSubjects-1/70voxel_model-spare') #Cuneal Cortex
 setwd('./MVB/R/dropMVBSubjects-1/control_frontalROI_70voxel_model-spare') #Frontal Cortex
 
-source('run_001_loadData.R')
+#Load data into dataframe 'df'
+source('run_loadData.R')
 ```
 
-For testing the multvariate mapping use raincloud package:
+For testing the multvariate mapping, use raincloud package:
 
 ```r
 source('run_MVB_shuffledMapping.R') 
@@ -97,7 +98,7 @@ source('run_MVB_shuffledMapping.R')
 
 ![Cuneal-Mapping](./MVB/R/dropMVBSubjects-1/70voxel_model-sparse/images/shuffledMVB.png)
 
-For logistic regression of Boost likelihood use MASS/polr packages:
+For logistic regression of Boost likelihood, use MASS/polr packages:
 ```r
 source('run_fMRI_MVB.R')
 ```
