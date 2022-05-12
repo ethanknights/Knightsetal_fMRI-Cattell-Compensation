@@ -19,6 +19,10 @@ df$ageTert = with(df,
                       include.lowest = T, 
                       labels = c("YA", "ML", "OA")))
 
+df_subset <- df[which(df$idx_couldNotDecode==0), ]
+
+unique(df_subset$ordy)
+
 
 #df$ordy <- as.factor(df$ordy) %stops plots!
 
@@ -27,8 +31,69 @@ df$ageTert = with(df,
 #              family = binomial(logit), data = df); summary(model)
 
 
-#Predict behaviour (age tert split)
-#======================================================================
+
+# Try plot Boost ~ Age * Bhv to mirror univariate interaction (not reproted)
+#=====================================================================================
+
+model <- glm(formula = as.factor(ordy) ~ scale(age) * scale(bhv),
+             family = binomial(), data = df_subset); summary(model)
+
+## Get Bayes Factor
+# Libraries
+library(brms)
+library(polspline)
+
+# Set seed
+set.seed(20210209)
+
+df2 <- data.frame(df_subset$ordy, scale(df_subset$age), scale(df_subset$bhv))
+names(df2) <- c("y","s_x",'s_x2')
+
+
+# Priors
+priors_student_1  <- c(prior(student_t(7, 0, 10) , class = "Intercept"),
+                       prior(student_t(7, 0, 1) , class = "b")) 
+
+# Fit BRMS model
+baseModel_student_1 <- brm(y ~ s_x + s_x2,
+                           data = df2,
+                           prior = priors_student_1,
+                           family = bernoulli(),
+                           chains = 8,
+                           save_all_pars = TRUE,
+                           sample_prior = TRUE,
+                           save_dso = TRUE, 
+                           seed = 6353) 
+
+
+# Extract posterior distribution to calculate BF
+postDist_slope <- posterior_samples(baseModel_student_1)$b_s_x2
+
+# Get prior density
+priorDensity <- dstudent_t(0, 7, 0, 1) # I calculate this instead of using the sampled prior dists
+
+# Calculate BF manually
+fit.posterior  <- logspline(postDist_slope)
+posterior      <- dlogspline(0, fit.posterior) 
+prior          <- priorDensity # Precalculated density
+bf             <- prior/posterior # Getting savage dickey ratio
+
+# Calculate OR (order-restricted aka two-tailed) BF manually 
+areaPosterior <- sum(postDist_slope > 0)/length(postDist_slope)
+posterior.OR  <- posterior/areaPosterior  # Divide by the cut-off area to ensure that dist sums to 1
+prior.OR      <- prior/0.5 # Divide by 0.5 to ensure that the prior sums to 1
+bf_OR         <- prior.OR/posterior.OR # Getting savage dickey ratio
+
+# Print results
+cat(paste("Two-tailed BF10 =", round(bf), "\nOne-tailed BF10 =", round(bf_OR)))
+
+
+#EK: get BF01 (one-tailed for > 0)
+bf01 <- 1 / bf_OR
+bf01
+
+
+
 
 lm_model <- lm(bhv ~ as.factor(ordy) * Age ,
                data = df); summary(lm_model)
@@ -77,6 +142,63 @@ qq$data[[3]]$fill[1:2] = 'olivedrab'
 qq$data[[3]]$fill[3:4] = 'darkturquoise'
 qq$data[[3]]$fill[5:6] = 'dodgerblue3'
 plot(ggplot_gtable(qq))
+
+
+
+#Predict behaviour (age tert split)
+#======================================================================
+# lm_model <- lm(as.factor(ordy) ~ Age * bhv,
+#                data = df); summary(lm_model)
+# p = plot_model(lm_model, type = "pred", terms = c("as.factor(ordy)", "Age [18, 54, 88]"), show.data = TRUE); p # vTert
+
+
+lm_model <- lm(ordy ~ Age * bhv,
+               data = df); summary(lm_model)
+p = plot_model(lm_model, type = "pred", terms = c("bhv", "Age [18, 54, 88]"), show.data = TRUE); p # vTert
+#formatting
+p <- p +
+  #ylim(0,60) +
+  #xlim(1,2) +
+  #scale_x_continuous(breaks = round(seq(1, max(2), by = 1),1),
+  #                   limits = c(1,2)) +
+  theme_bw() +
+  theme(panel.border = element_blank(),
+        panel.grid.major = element_blank(),
+        legend.position = "right",
+        panel.grid.minor = element_blank(),
+        axis.line =
+          element_line(colour = "black",size = 1.5),
+        axis.ticks = element_line(colour = "black",
+                                  size = 1.5),
+        text = element_text(size=24)); p
+ggsave(file.path('images',"lSPOC_MVB-bhvInteraction.png"),
+       width = 25, height = 25, units = 'cm', dpi = 300)
+# #hack plot
+qq <- ggplot_build(p)
+# #hack plot - scatter
+qq$data[[1]]$shape <- o
+qq$data[[1]]$size <- 2.5
+qq$data[[1]]$stroke <- 1
+qq$data[[1]]$alpha <- 0.5
+qq$data[[1]]$colour[df$ageTert == 'YA'] = 'olivedrab'
+qq$data[[1]]$colour[df$ageTert == 'ML'] = 'darkturquoise'
+qq$data[[1]]$colour[df$ageTert == 'OA'] = 'dodgerblue3'
+# #hack plot - regression line
+qq$data[[2]]$size <- 2.5
+qq$data[[2]]$colour[1:2] = 'olivedrab'
+qq$data[[2]]$colour[3:4] = 'darkturquoise'
+qq$data[[2]]$colour[5:6] = 'dodgerblue3'
+# #hack plot - CI shaded
+qq$data[[3]]$alpha <- 0.2
+qq$data[[3]]$fill[1:2] = 'olivedrab'
+qq$data[[3]]$fill[3:4] = 'darkturquoise'
+qq$data[[3]]$fill[5:6] = 'dodgerblue3'
+plot(ggplot_gtable(qq))
+
+
+
+
+
 
 
 # #Old stuff
