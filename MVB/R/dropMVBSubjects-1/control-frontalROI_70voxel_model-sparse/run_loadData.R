@@ -61,6 +61,11 @@ df$ageTert = with(df,
                       include.lowest = T, 
                       labels = c("YA", "ML", "OA")))
 
+# Also load univariate data (for use as a covariate)
+df_univariate = read.csv('/imaging/camcan/sandbox/kt03/projects/collabs/ethanK/ccc/R/csv/T.csv')
+df <- merge(df, df_univariate, by = c("CCID", "CCID"))
+
+
 ## RUN ANALYSES:
 # run_fMRI_spread.R
 # run_fMRI_MVB.R
