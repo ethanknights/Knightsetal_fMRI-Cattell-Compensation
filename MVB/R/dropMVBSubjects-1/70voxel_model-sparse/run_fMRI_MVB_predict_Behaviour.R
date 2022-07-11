@@ -143,6 +143,56 @@ qq$data[[3]]$fill[3:4] = 'darkturquoise'
 qq$data[[3]]$fill[5:6] = 'dodgerblue3'
 plot(ggplot_gtable(qq))
 
+#Predict log-evidence from behaviour (age tert split)
+#======================================================================
+
+
+model <- lm(formula = groupFvals ~ scale(age) * scale(bhv),
+            data = df_subset); summary(model)
+
+#Plot it (non-scaled)
+model <- lm(groupFvals ~ age * bhv,
+            data = df_subset); summary(model)
+p = plot_model(model, type = "pred", terms = c("bhv", "age [18, 54, 88]"), show.data = TRUE); p # vTert
+#formatting
+p <- p +
+  #ylim(0,60) +
+  #xlim(1,2) +
+  #scale_x_continuous(breaks = round(seq(1, max(2), by = 1),1),
+  #                   limits = c(1,2)) +
+  theme_bw() +
+  theme(panel.border = element_blank(),
+        panel.grid.major = element_blank(),
+        legend.position = "right",
+        panel.grid.minor = element_blank(),
+        axis.line =
+          element_line(colour = "black",size = 1.5),
+        axis.ticks = element_line(colour = "black",
+                                  size = 1.5),
+        text = element_text(size=24)); p
+# #hack plot
+qq <- ggplot_build(p)
+# #hack plot - scatter
+qq$data[[1]]$shape <- o
+qq$data[[1]]$size <- 2.5
+qq$data[[1]]$stroke <- 1
+qq$data[[1]]$alpha <- 0.5
+qq$data[[1]]$colour[df$ageTert == 'YA'] = 'olivedrab'
+qq$data[[1]]$colour[df$ageTert == 'ML'] = 'darkturquoise'
+qq$data[[1]]$colour[df$ageTert == 'OA'] = 'dodgerblue3'
+# #hack plot - regression line
+qq$data[[2]]$size <- 2.5
+qq$data[[2]]$colour[1:7] = 'olivedrab'
+qq$data[[2]]$colour[8:14] = 'darkturquoise'
+qq$data[[2]]$colour[15:21] = 'dodgerblue3'
+# #hack plot - CI shaded
+qq$data[[3]]$alpha <- 0.2
+qq$data[[3]]$fill[1:7] = 'olivedrab'
+qq$data[[3]]$fill[8:14] = 'darkturquoise'
+qq$data[[3]]$fill[15:21] = 'dodgerblue3'
+plot(ggplot_gtable(qq))
+
+
 
 
 #Predict behaviour (age tert split)
