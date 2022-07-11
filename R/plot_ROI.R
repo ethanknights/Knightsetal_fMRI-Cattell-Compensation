@@ -86,7 +86,7 @@ bf10
 
 
 #frontal
-lm_model <- lm(scale(frontal) ~ scale(Age) * scale(bhv) + scale(Gender) + scale(handedness),
+lm_model <- lm(scale(frontal) ~ scale(Age) * scale(bhv) + scale(Gender),
                data = df); summary(lm_model)
 write.csv(as.data.frame(summary(lm_model)$coef), file=file.path('regression_ROI_frontal.csv'))
 #lm_model <- lm(frontal ~ scale(Age) * scale(bhv),
