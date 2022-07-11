@@ -61,6 +61,11 @@ source('plot_bhv.R')
 
 #For interaction: Activation ~ age * bhv
 source('plot_ROI.R')
+
+#For the control vascular RSFA analysis:
+setwd('R_vascular')
+source('load_data_RSFA.R')
+source('plot_ROI_RSFA.R')
 ```
 
 ![Cuneal-UnivariateInteraction](./R/lSPOCBYbhv_withAgeTert.png)
