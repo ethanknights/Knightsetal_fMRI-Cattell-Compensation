@@ -8,8 +8,10 @@ options(scipen = 999)
 # df$rMFG_scale = as.numeric(scale(df$rMFG))
 
 
-lm_model <- lm(lSPOC ~ Age * bhv + Gender,
+lm_model <- lm(scale(lSPOC) ~ scale(Age) * scale(bhv) + scale(Gender),
                data = df); summary(lm_model)
+write.csv(as.data.frame(summary(lm_model)$coef), file=file.path('regression_ROI_cuneal.csv'))
+
 # lm_model <- lm(lSPOC ~ scale(Age) * scale(bhv),
 #                data = df); summary(lm_model)
 
@@ -84,10 +86,11 @@ bf10
 
 
 #frontal
-lm_model <- lm(frontal ~ scale(Age) * scale(bhv) + scale(Gender) + scale(handedness),
+lm_model <- lm(scale(frontal) ~ scale(Age) * scale(bhv) + scale(Gender) + scale(handedness),
                data = df); summary(lm_model)
-lm_model <- lm(frontal ~ scale(Age) * scale(bhv),
-               data = df); summary(lm_model)
+write.csv(as.data.frame(summary(lm_model)$coef), file=file.path('regression_ROI_frontal.csv'))
+#lm_model <- lm(frontal ~ scale(Age) * scale(bhv),
+#               data = df); summary(lm_model)
 
 
 full <-           lmBF(frontal_scale ~ Age_scale * bhv_scale + GenderNum_scale + handedness_scale,

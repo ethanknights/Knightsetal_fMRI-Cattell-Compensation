@@ -8,8 +8,9 @@ options(scipen = 999)
 # df$rMFG_scale = as.numeric(scale(df$rMFG))
 
 
-lm_model <- lm(lSPOC ~ scale(Age) * scale(bhv) + scale(Gender),
+lm_model <- lm(scale(lSPOC) ~ scale(Age) * scale(bhv) + scale(Gender),
                data = df); summary(lm_model)
+write.csv(as.data.frame(summary(lm_model)$coef), file=file.path('RSFA_regression_bhv.csv'))
 
 #Plot with fit (but no data points scatter)
 lm_model <- lm(lSPOC ~ Age * bhv + Gender,
@@ -17,7 +18,7 @@ lm_model <- lm(lSPOC ~ Age * bhv + Gender,
 p = plot_model(lm_model, type = "pred", terms = c("bhv", "Age [18, 54, 88]"), show.data = TRUE); p # vTert
 #formatting
 p <- p + #geom_hline(yintercept = 0.5) +
-  ylim(-1.5,0.9) +
+  ylim(-0.5,0.5) +
   xlim(0,60) +
   # scale_x_continuous(breaks = round(seq(20, max(80), by = 20),1),
   #                    limits = c(15,90)) +
