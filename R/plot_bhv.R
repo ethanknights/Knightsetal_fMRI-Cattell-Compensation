@@ -68,7 +68,6 @@ plot(ggplot_gtable(qq))
 
 #BF10
 #-------------------------------------
-
 full <- lmBF(bhv.inScanner ~ ageLin_scale + GenderNum,
                data = wide)
 part <- lmBF(bhv.inScanner ~ GenderNum,
@@ -96,10 +95,17 @@ cor.test(x = wide$bhv.inScanner, y = wide$bhv.outScanner)
 full <- correlationBF(x = wide$bhv.inScanner, y = wide$bhv.outScanner)
 1 / full
 
-
+#ICC
+library(irr)
+# #Zscore version (shoudlnt use as losing info from mean/stdev)!
+# icc(
+#   wide[c('bhv.inScanner','bhv.outScanner')],
+#     model = "oneway", type = "agreement", unit = "single")
+#Raw data ICC
 icc(
-  wide[c('bhv.inScanner','bhv.outScanner')],
-    model = "oneway", type = "agreement", unit = "single")
+  df[c('bhv','bhv_outOfScanner')],
+  model = "oneway", type = "agreement", unit = "single")
+
 
 #plot in-out correlation
 p <- ggplot(wide, aes(x = bhv.inScanner, y = bhv.outScanner, colour = age))
