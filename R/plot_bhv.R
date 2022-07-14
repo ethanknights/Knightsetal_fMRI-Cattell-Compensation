@@ -90,7 +90,8 @@ lm_model <- lm(bhv.outScanner ~ ageLinQuad_scale * GenderNum,
 write.csv(as.data.frame(summary(lm_model)$coef), file=file.path(outImageDir,'regression_bhv-outScanner.csv'))
 
 # in/out-of-scanner correlation
-cor.test(x = wide$bhv.inScanner, y = wide$bhv.outScanner)
+cor.test(x = wide$bhv.inScanner, y = wide$bhv.outScanner, method = 'pearson', alternative = 'greater') #predict positive
+#cor.test(x = df$bhv,df$bhv_outOfScanner, method = 'pearson', alternative = 'greater')
 
 full <- correlationBF(x = wide$bhv.inScanner, y = wide$bhv.outScanner)
 1 / full
