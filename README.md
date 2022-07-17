@@ -24,18 +24,41 @@ This repository contains code accompanying the multivariate Bayesian machine-lea
  
 ## Datasets
 - For performing Multivariate Bayes and the preceding whole-brain univariate analysis (e.g. generating second-level models, defining ROIs, extracting timeseries), download the  Cattell first-level model images derived from automatic analysis (see Taylor et al. 2017 NeuroImage) by submitting a Cam-CAN data-request: <br>```https://camcan-archive.mrc-cbu.cam.ac.uk/dataaccess``` <br><br>
-- For hypothesis testing in R, download & extract the summary datasets from:
+- For hypothesis testing in R, download & extract the summary dataset from:
 ```https://osf.io/v7kmh/```
-    - Then move data to the 3 corresponding analysis directories:
-        ```bash
-        #For Univariate stats:
-        mv univariate.csv ./R/csv/
+    - Then move each ```.csv```  to the corresponding analysis directory:
 
-        #For Cuneal cortex MVB stats:
-        mv MVB_cuneal.csv ./MVB/70voxel_model-spare/R/csv/
 
-        #For Frontal cortex MVB stats:
-        mv MVB_frontal.csv ./MVB/control_frontalROI_70voxel_model-spare/R/csv/
+        #### Univariate
+        ```sh
+        mkdir R/csv
+        mv univariate.csv R/csv/
+        ```
+
+        #### Univariate (Vascular control)
+        ```sh
+        mkdir R_vascular/csv
+        mv univariate_vascular.csv R_vascular/csv/
+        ```
+
+        #### MVB
+        ```sh
+        # Cuneal Cortex
+        mkdir MVB/R/dropMVBSubjects-1/70voxel_model-sparse/csv
+        mv MVB_cuneal.csv  MVB/R/dropMVBSubjects-1/70voxel_model-sparse/csv/
+
+        # Frontal cortex
+        mkdir MVB/R/dropMVBSubjects-1/control-frontalROI_70voxel_model-sparse/csv
+        mv MVB_frontal.csv MVB/R/dropMVBSubjects-1/control-frontalROI_70voxel_model-sparse/csv
+        ```
+
+        #### MVB (Multivariate mapping)
+        ```sh
+        # Cuneal Cortex
+        mv MVB_multvariateMapping-Cuneal/extradata_ShuffledGroupFVals.csv MVB/R/dropMVBSubjects-1/70voxel_model-sparse/csv/
+
+        # Frontal cortex
+        mv MVB_multvariateMapping-Frontal/extradata_ShuffledGroupFVals.csv MVB/R/dropMVBSubjects-1/control-frontalROI_70voxel_model-sparse/csv
         ```
 <br>
 <br>
@@ -46,7 +69,7 @@ Use matlab to run fMRI preprocessing and generate the group univariate contrasts
 ```c
 pipeline.m
 
-/* Alternatively, download the summary datasets described earlier the Prerequisties section.
+/* Alternatively, download the summary datasets described earlier in the Prerequisties section.
 ```
 
 ## **2) Univariate Modelling**
@@ -80,7 +103,7 @@ setupDir.m
 wrapper.m
 doPostProcessing.m
 
-/* Alternatively, download the summary datasets described earlier the Prerequisties section.
+/* Alternatively, download the summary datasets described earlier in the Prerequisties section.
 ```
 
 ## **4) Multivariate Modelling**
