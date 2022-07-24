@@ -30,7 +30,6 @@ graphics.off() #clear plots
 options(scipen = 0) #0 = re-enable. Add to ~/.RProfile to set as default.
 
 #---- Setup ----#
-# wd <- "/imaging/ek03/MVB/FreeSelection/MVB/R"
 wd = dirname(rstudioapi::getActiveDocumentContext()$path)
 setwd(wd)
 
@@ -40,7 +39,7 @@ dir.create(outImageDir)
 
 
 #---- Load Data ----#
-rawD <- read.csv(file.path(rawDir,'data.csv'), header=TRUE,sep=",")
+rawD <- read.csv(file.path(rawDir,'MVB_frontal.csv'), header=TRUE,sep=",")
 df = rawD
 
 #---- Transform some stuff ----#
@@ -62,7 +61,7 @@ df$ageTert = with(df,
                       labels = c("YA", "ML", "OA")))
 
 # Also load univariate data (for use as a covariate)
-df_univariate = read.csv('/imaging/camcan/sandbox/kt03/projects/collabs/ethanK/ccc/R/csv/T.csv')
+df_univariate = read.csv('../../../../R/csv/univariate.csv')
 df <- merge(df, df_univariate, by = c("CCID", "CCID"))
 
 

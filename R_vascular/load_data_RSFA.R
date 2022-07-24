@@ -22,7 +22,7 @@ setwd(wd)
 outImageDir = ''
 
 #---- Load Data ----#
-rawD <- read.csv(file.path('RSFA_t.csv'), header=TRUE,sep=",")
+rawD <- read.csv(file.path('csv/univariate_vascular_RSFA.csv'), header=TRUE,sep=",")
 df = rawD
 
 

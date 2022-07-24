@@ -26,7 +26,7 @@ outImageDir = 'images'
 dir.create(outImageDir,showWarnings = FALSE)
 
 #---- Load Data ----#
-rawD <- read.csv(file.path(rawDir,'T.csv'), header=TRUE,sep=",")
+rawD <- read.csv(file.path(rawDir,'univariate.csv'), header=TRUE,sep=",")
 df = rawD
 
 #---- Transform some stuff ----#
