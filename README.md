@@ -38,7 +38,7 @@ This repository contains code accompanying the multivariate Bayesian machine-lea
         #### Univariate (Vascular control)
         ```sh
         mkdir R_vascular/csv
-        mv univariate_vascular.csv R_vascular/csv/
+        mv univariate_vascular_RSFA.csv R_vascular/csv/
         ```
 
         #### MVB
