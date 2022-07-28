@@ -56,9 +56,8 @@ qq$data[[3]]$alpha <- 0.2
 qq$data[[3]]$fill[1:9] = 'orange'
 qq$data[[3]]$fill[10:18] = 'purple'
 plot(ggplot_gtable(qq))
-library(grid)
 grid.draw(ggplot_gtable(qq))
-dev.copy(device = tiff, filename = file.path(outImageDir,'bhv_plot.tiff'),width = 1000, height = 600); dev.off()
+dev.copy(device = tiff, filename = file.path(outImageDir,'bhv_plot.tiff'), width = pxwidth, height = pxheight); dev.off()
 
 #outscanner
 #====================================
@@ -85,4 +84,4 @@ p <- p + geom_point(shape = 21, size = 3, stroke = 1.25, alpha = 1, colour = 'bl
         axis.line = element_line(colour = "black", size = 1.5), 
         axis.ticks = element_line(colour = "black", size = 1.5),
         text = element_text(size=24)); p
-p
+dev.copy(device = tiff, filename = file.path(outImageDir,'corr_plot.tiff'), width = pxwidth, height = pxheight); dev.off()

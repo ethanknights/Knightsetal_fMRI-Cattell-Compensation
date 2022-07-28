@@ -8,6 +8,7 @@ library(dplyr)
 library(tidyverse)
 library(reshape2)
 library(ggeffects)
+library(grid)
 rm(list = ls()) # clears environment
 cat("\f") # clears console
 dev.off() # clears graphics device
@@ -19,15 +20,21 @@ graphics.off() #clear plots
 wd = dirname(rstudioapi::getActiveDocumentContext()$path)
 setwd(wd)
 
-outImageDir = ''
+rawDir = 'csv'
+outImageDir = 'images'
+dir.create(outImageDir,showWarnings = FALSE)
+
+pxheight = 600
+pxwidth = 800
+
 
 #---- Load Data ----#
-rawD <- read.csv(file.path('csv/univariate_vascular_RSFA.csv'), header=TRUE,sep=",")
+rawD <- read.csv(file.path(rawDir,'univariate_vascular_RSFA.csv'), header=TRUE, sep=",")
 df = rawD
 
 
-# Add age tertile
-vTert = quantile(df$Age, c(0:3/3)) #rememebr this is useful for plot_model
+#---- Tertile ----#
+vTert = quantile(df$Age, c(0:3/3))
 df$ageTert = with(df, 
                   cut(Age, 
                       vTert, 

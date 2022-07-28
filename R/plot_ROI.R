@@ -1,5 +1,8 @@
 options(scipen = 0)
 
+# Cuneus
+#----------
+
 #lm()
 lm_model <- lm(lSPOC ~ scale(Age) * scale(bhv) * scale(Gender),
                data = df); summary(lm_model)
@@ -50,11 +53,13 @@ qq$data[[2]]$y[21] = NA
 qq$data[[3]]$y[21] = NA
 qq$data[[3]]$ymin[21] = NA
 qq$data[[3]]$yax[21] = NA
-#replot
 plot(ggplot_gtable(qq))
+grid.draw(plot(ggplot_gtable(qq)))
+dev.copy(device = tiff, filename = file.path(outImageDir,'cuneal_interaction_plot.tiff'), width = pxwidth, height = pxheight); dev.off()
 
 
-#frontal
+# Frontal
+#----------
 
 #lm()
 lm_model <- lm(frontal ~ scale(Age) * scale(bhv) * scale(Gender),
@@ -102,3 +107,6 @@ qq$data[[3]]$fill[1:7] = 'olivedrab'
 qq$data[[3]]$fill[8:14] = 'darkturquoise'
 qq$data[[3]]$fill[15:21] = 'dodgerblue3'
 plot(ggplot_gtable(qq))
+grid.draw(plot(ggplot_gtable(qq)))
+dev.copy(device = tiff, filename = file.path(outImageDir,'frontal_interaction_plot.tiff'), width = pxwidth, height = pxheight); dev.off()
+
