@@ -73,7 +73,7 @@ lm_model <- lm(frontal ~ Age * bhv + Gender,
 p = plot_model(lm_model, type = "pred", terms = c("bhv", "Age [18, 54, 88]"), show.data = TRUE); p # vTert
 #formatting
 p <- p +
-  ylim(-1.5,0.9) +
+  ylim(-1,1) +
   xlim(0,60) +
   theme_bw() +
   theme(panel.border = element_blank(),
@@ -85,19 +85,18 @@ p <- p +
         axis.ticks = element_line(colour = "black",
                                   size = 1.5),
         text = element_text(size=24)); p
-# #hack plot
 qq <- ggplot_build(p)
 # #hack plot - scatter
-qq$data[[1]]$shape <- o
-qq$data[[1]]$size <- 2.5
-qq$data[[1]]$stroke <- 1
-qq$data[[1]]$alpha <- 0.5
-qq$data[[1]]$colour[df$ageTert == 'YA'] = 'olivedrab'
-qq$data[[1]]$colour[df$ageTert == 'ML'] = 'darkturquoise'
-qq$data[[1]]$colour[df$ageTert == 'OA'] = 'dodgerblue3'
+qq$data[[1]]$shape <- 21
+qq$data[[1]]$size <- 3
+qq$data[[1]]$stroke <- 0.75
+qq$data[[1]]$colour = 'black'
+qq$data[[1]]$alpha <- 1
+qq$data[[1]]$fill[df$ageTert == 'YA'] = 'olivedrab'
+qq$data[[1]]$fill[df$ageTert == 'ML'] = 'darkturquoise'
+qq$data[[1]]$fill[df$ageTert == 'OA'] = 'dodgerblue3'
 # #hack plot - regression line
 qq$data[[2]]$size <- 2.5
-#qq$data[[2]]$y[1:2] = NA # truncate (to match CI shading)
 qq$data[[2]]$colour[1:7] = 'olivedrab'
 qq$data[[2]]$colour[8:14] = 'darkturquoise'
 qq$data[[2]]$colour[15:21] = 'dodgerblue3'
