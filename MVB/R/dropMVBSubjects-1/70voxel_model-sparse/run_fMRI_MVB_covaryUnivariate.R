@@ -17,13 +17,13 @@ ci<-confint(model)
 OR <- exp(cbind(OR = coef(model), ci)); OR
 write.csv(as.data.frame(OR), file=file.path(outImageDir,'glm_MVB_covaryUnivariate_OR.csv'))
 #effect size cohen d? d = b / (sqrt(n)*SE) = b / SE * 1 / sqrt(n)  = z/sqrt(n)
-source("getBF_MVB_linearANDQuadratic_fullModel.R") #get BF01 for Boost ~ Age > 0
+#source("getBF_MVB_linearANDQuadratic_fullModel.R") #get BF01 for Boost ~ Age > 0
 
 
 #Plot - geom_density
 #fancier than: plot(df$age,df$ordy)
 ggplot(df_subset, aes(age, fill = fct_rev(ordy))) +
-  geom_density(position='fill', alpha = 0.75,color="white", kernel = 'cosine') +
+  geom_density(position='fill', alpha = 0.75, color = "black", kernel = 'cosine', size = 2) +
   theme_bw() +
   theme(panel.border = element_blank(),
         panel.grid.major = element_blank(),
