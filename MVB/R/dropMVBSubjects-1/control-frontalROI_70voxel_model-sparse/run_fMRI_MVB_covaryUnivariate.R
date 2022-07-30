@@ -8,9 +8,8 @@ unique(df_subset$ordy)
 
 #---------- Version if only 2 levels in ordy (e.g. Boost, Reduction; no equivalent) -------#
 #-- First just do linear age (no quadratic) (as ordinal data) --#
-model <- glm(formula = ordy ~ scale(age0z2) * scale(GenderNum) + scale(frontal),
-             family = binomial(logit), data = df_subset)
-summary(model)
+model <- glm(formula = ordy ~ scale(age) * scale(GenderNum) + scale(frontal),
+             family = binomial(logit), data = df_subset); summary(model)
 write.csv(as.data.frame(summary(model)$coef), file=file.path(outImageDir,'glm_MVB_covaryUnivariate.csv'))
 #Get Odds ratio
 exp(coef(model))
