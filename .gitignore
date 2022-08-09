@@ -1,6 +1,6 @@
 ##Data
 OSF_data
-.csv
+*.csv
 
 ##Mac
 .DS_Store
