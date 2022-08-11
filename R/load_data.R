@@ -28,7 +28,6 @@ dir.create(outImageDir,showWarnings = FALSE)
 pxheight = 600
 pxwidth = 800
 
-
 #---- Load Data ----#
 rawD <- read.csv(file.path(rawDir,'univariate.csv'), header=TRUE,sep=",")
 df = rawD
@@ -48,4 +47,3 @@ write.csv(df,'T_outputfromR_withAgeTert.csv')
 #---- Run Analyses (manually) ----#
 #- plot_bhv.R 
 #- plot_ROI.R
-#- descriptives.R

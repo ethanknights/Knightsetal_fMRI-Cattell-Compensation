@@ -43,14 +43,10 @@ rawD <- read.csv(file.path(rawDir,'MVB_cuneal.csv'), header=TRUE,sep=",")
 df = rawD
 
 #---- Transform some stuff ----#
-#Age quadratic expansion
-df$age0z2 <- scale(poly(scale(df$age),2)) #1st linear, 2nd quad
 #make variablers factors
 df$ordy <- as.factor(df$ordy) #Check it worked: sapply(df, class)
 
 #---- assign subs a tertile age group in df$tert ----#
-#https://stackoverflow.com/questions/62574146/how-to-create-tertile-in-r
-
 # Find tertiles
 vTert = quantile(df$age, c(0:3/3)) #rememebr this is useful for plot_model
 

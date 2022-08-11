@@ -16,7 +16,6 @@ graphics.off() #clear plots
 
 
 #---- Setup ----#
-# wd <- "/imaging/ek03/MVB/FreeSelection/MVB/R"
 wd = dirname(rstudioapi::getActiveDocumentContext()$path)
 setwd(wd)
 
@@ -41,4 +40,4 @@ df$ageTert = with(df,
                       include.lowest = T, 
                       labels = c("YA", "ML", "OA")))
 
-# Now: plot_ROI.R
+# Now: plot_ROI_RSFA.R

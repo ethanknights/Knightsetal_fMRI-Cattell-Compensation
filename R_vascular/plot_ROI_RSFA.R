@@ -4,12 +4,12 @@ options(scipen = 999)
 #----------
 
 #lm()
-lm_model <- lm(lSPOC ~ scale(Age) * scale(bhv) * scale(Gender),
+lm_model <- lm(lSPOC ~ scale(Age) * scale(bhv) + scale(Gender),
                data = df); summary(lm_model)
-write.csv(as.data.frame(summary(lm_model)$coef), file=file.path('RSFA_regression_bhv.csv'))
+write.csv(as.data.frame(summary(lm_model)$coef), file=file.path(outImageDir,'RSFA_regression_Cuneal.csv'))
 
 #Plot lm()
-lm_model <- lm(lSPOC ~ Age * bhv * Gender,
+lm_model <- lm(lSPOC ~ Age * bhv + Gender,
                data = df); summary(lm_model)
 p = plot_model(lm_model, type = "pred", terms = c("bhv", "Age [18, 54, 88]"), show.data = TRUE); p # vTert
 p <- p +
@@ -25,12 +25,10 @@ p <- p +
         axis.ticks = element_line(colour = "black",
                                   size = 1.5),
         text = element_text(size=24)); p
-ggsave(file.path("RSFA_lSPOC_sjPlot.png"),
-       width = 25, height = 25, units = 'cm', dpi = 300)
 qq <- ggplot_build(p)
 # #hack plot - scatter
 qq$data[[1]]$shape <- 21
-qq$data[[1]]$size <- 3
+qq$data[[1]]$size <- 6
 qq$data[[1]]$stroke <- 0.75
 qq$data[[1]]$colour = 'black'
 qq$data[[1]]$alpha <- 1
@@ -56,10 +54,12 @@ dev.copy(device = tiff, filename = file.path(outImageDir,'RSFA_cuneal_interactio
 #----------
 
 #lm()
-lm_model <- lm(frontal ~ scale(Age) * scale(bhv) * scale(Gender),
+lm_model <- lm(frontal ~ scale(Age) * scale(bhv) + scale(Gender),
                data = df); summary(lm_model)
+write.csv(as.data.frame(summary(lm_model)$coef), file=file.path(outImageDir,'RSFA_regression_frontal.csv'))
 
-#Pllot lm()
+
+#Plot lm()
 lm_model <- lm(frontal ~ Age * bhv + Gender,
                data = df); summary(lm_model)
 p = plot_model(lm_model, type = "pred", terms = c("bhv", "Age [18, 54, 88]"), show.data = TRUE); p # vTert
@@ -79,7 +79,7 @@ p <- p +
 qq <- ggplot_build(p)
 # #hack plot - scatter
 qq$data[[1]]$shape <- 21
-qq$data[[1]]$size <- 3
+qq$data[[1]]$size <- 6
 qq$data[[1]]$stroke <- 0.75
 qq$data[[1]]$colour = 'black'
 qq$data[[1]]$alpha <- 1
