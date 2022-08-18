@@ -5,6 +5,16 @@ This repository contains code accompanying the multivariate Bayesian machine-lea
 <br>
 <br>
 
+# **Modelling Quickstart**
+```sh
+git clone https://github.com/ethanknights/Knightsetal2022_fMRI-Cattell-Compensation
+cd Knightsetal2022_fMRI-Cattell-Compensation
+./setup.sh
+
+#Use R to perform univariate/multivariate modelling analysis (see README sections 2/4 in 'Analysis Pipline'). 
+#e.g. setwd('R'); source('load_data.R')
+```
+
 # **Prerequisites**
 ## Software
 - FSL v4.0+
