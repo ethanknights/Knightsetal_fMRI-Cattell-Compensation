@@ -30,7 +30,8 @@ cd Knightsetal2022_fMRI-Cattell-Compensation
     - BayesFactor
     - ggeffects
     - *Popular manipulation/visualisation packages (e.g., ggplot2, dplyr, tidyverse)*
-
+- Python
+    - gl package (to plot t-statistic maps in mricroGL)
  
 ## Datasets
 ### Raw data for Machine-Learning
@@ -88,6 +89,34 @@ pipeline.m
 
 /* Alternatively, download the summary datasets described earlier in the Prerequisties section.
 ```
+
+Use Python to plot TFCE-corrected t-statistic maps with MRIcroGL.
+<br>
+
+```./python/mosaic_MRICRON_HardBIGEasy.py```
+```py
+gl.overlayload('./nii_HardBIGEasy/Intercept_tfce197.nii')
+gl.minmax(2, 0, 10000)
+gl.colorname (1,"1red")
+```
+
+![tStatMap_HardBIGEasy](./python/nii_HardBIGEasy/HardBIGEasy_pos.png)
+
+```./python/mosaic_MRICRON_Covariates.py```:
+```py
+
+gl.overlayload('/nii_Covariates/tval_Age_tfce197.nii')
+gl.minmax(1, 0, 250)
+gl.colorname (1,"2green")
+
+gl.overlayload('nii_Covariates/tval_PC6_tfce197.nii')
+gl.minmax(2, 0, 250)
+gl.colorname (2,"1red")
+```
+![tStatMap_Covariates](./python/nii_Covariates/PerfANDAge_Additive.png)
+
+
+
 
 ## **2) Univariate Modelling**
 In R, generate the regression models & plots:
