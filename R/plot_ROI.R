@@ -13,7 +13,7 @@ lm_model <- lm(lSPOC ~ Age * bhv + scale,
                data = df); summary(lm_model)
 p = plot_model(lm_model, type = "pred", terms = c("bhv", "Age [18, 54, 88]"), show.data = TRUE); p # vTert
 p <- p +
-  ylim(-1.5,0.9) +
+  ylim(-1,1) +
   xlim(0,60) +
   theme_bw() +
   theme(panel.border = element_blank(),
