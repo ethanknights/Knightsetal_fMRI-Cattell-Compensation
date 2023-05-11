@@ -6,13 +6,22 @@ This repository contains code accompanying the multivariate Bayesian machine-lea
 <br>
 
 # **Modelling Quickstart**
+Clone & download processed fMRI/behavioural data with shell from root:
 ```sh
 git clone https://github.com/ethanknights/Knightsetal2022_fMRI-Cattell-Compensation
-cd Knightsetal2022_fMRI-Cattell-Compensation
-./setup.sh
 
-#Use R to perform univariate/multivariate modelling analysis (see README sections 2/4 in 'Analysis Pipline'). 
-#e.g. setwd('R'); source('load_data.R')
+cd Knightsetal2022_fMRI-Cattell-Compensation
+
+./setup.sh
+```
+
+Use R to perform univariate/multivariate modelling analysis (see README sections 2/4 in 'Analysis Pipline') e.g.: 
+```r
+setwd('R')
+
+source('load_data.R')
+
+source('plot_ROI.R') #For interaction: activation ~ age * bhv
 ```
 
 # **Prerequisites**
