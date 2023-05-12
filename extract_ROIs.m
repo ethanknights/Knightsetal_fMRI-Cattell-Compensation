@@ -9,23 +9,23 @@ T.f_Cattellcont = regexprep(T.f_Cattellcont,'/home/sw932/Cattell_analysis/cattel
 VOI = table();
 %rMFG
 roifN = fullfile(path2data,'masks','Fig_ROIs','4ROIs','mask-cluster_con-intersectAgeBhv_ROI-rMFG.nii');
-[tmpD] = ek_extract_VOI(roifN,T.f_Cattellcont);
+[tmpD] = extract_VOI(roifN,T.f_Cattellcont);
 VOI.rMFG = tmpD';
 %lSPOC
 roifN = fullfile(path2data,'masks','Fig_ROIs','4ROIs','mask-cluster_con-intersectAgeBhv_ROI-PCu.nii');
-[tmpD] = ek_extract_VOI(roifN,T.f_Cattellcont);
+[tmpD] = extract_VOI(roifN,T.f_Cattellcont);
 VOI.lSPOC = tmpD';
 %angCing
 roifN = fullfile(path2data,'masks','Fig_ROIs','4ROIs','mask-cluster_con-intersectAgeBhv_ROI-extra_antCing.nii');
-[tmpD] = ek_extract_VOI(roifN,T.f_Cattellcont);
+[tmpD] = extract_VOI(roifN,T.f_Cattellcont);
 VOI.antCing = tmpD';
 %lPFC
 roifN = fullfile(path2data,'masks','Fig_ROIs','4ROIs','mask-cluster_con-intersectAgeBhv_ROI-extra_lPFC.nii');
-[tmpD] = ek_extract_VOI(roifN,T.f_Cattellcont);
+[tmpD] = extract_VOI(roifN,T.f_Cattellcont);
 VOI.lPFC = tmpD';
 %frontalANDCing
 roifN = fullfile(path2data,'masks','Fig_ROIs','4ROIs','mask-cluster_con-intersectAgeBhv_ROI-frontalANDCing.nii');
-[tmpD] = ek_extract_VOI(roifN,T.f_Cattellcont);
+[tmpD] = extract_VOI(roifN,T.f_Cattellcont);
 VOI.frontal = tmpD';
 
 
