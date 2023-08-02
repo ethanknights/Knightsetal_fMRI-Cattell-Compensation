@@ -19,7 +19,7 @@ write.csv(as.data.frame(OR), file=file.path(outImageDir,'glm_MVB_OR.csv'))
 
 #Plot - geom_density
 ggplot(df_subset, aes(age, fill = fct_rev(ordy))) +
-  geom_density(position='fill', alpha = 0.75,color="white", kernel = 'cosine') +
+  geom_density(position='fill', alpha = 0.75,color="black", kernel = 'cosine') +
   theme_bw() +
   theme(panel.border = element_blank(),
         panel.grid.major = element_blank(),
