@@ -1,4 +1,4 @@
-## Knights et al. (2022). Age-related Functional Compensation for Fluid Intelligence.
+## Knights et al. (2023). Age-related Functional Compensation for Fluid Intelligence.
 
 This repository contains code accompanying the multivariate Bayesian machine-learning project described in the following preprint:<br>
 [TBC]
@@ -8,9 +8,9 @@ This repository contains code accompanying the multivariate Bayesian machine-lea
 # **Modelling Quickstart**
 Clone & download processed fMRI/behavioural data with shell from root:
 ```sh
-git clone https://github.com/ethanknights/Knightsetal2022_fMRI-Cattell-Compensation
+git clone https://github.com/ethanknights/Knightsetal_fMRI-Cattell-Compensation
 
-cd Knightsetal2022_fMRI-Cattell-Compensation
+cd Knightsetal_fMRI-Cattell-Compensation
 
 ./setup.sh
 ```
