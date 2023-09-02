@@ -1,4 +1,4 @@
-## Knights et al. (2023). Age-related Functional Compensation for Fluid Intelligence.
+## Knights et al. (2023). Neural Evidence of Functional Compensation for Fluid Intelligence in Healthy Ageing.
 
 This repository contains code accompanying the multivariate Bayesian machine-learning project described in the following preprint:<br>
 [TBC]
