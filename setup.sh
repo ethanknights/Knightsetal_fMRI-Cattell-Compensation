@@ -45,6 +45,6 @@ rmdir MVB_multvariateMapping-Cuneal/
 rmdir MVB_multvariateMapping-Frontal/
 
 echo 'Setup complete - ready for R modelling. For analysis instructions see:
-https://github.com/ethanknights/Knightsetal2022_fMRI-Cattell-Compensation
+https://github.com/ethanknights/Knightsetal_fMRI-Cattell-Compensation
 
 '
