@@ -1,7 +1,7 @@
 ## Knights et al. (2023). Neural Evidence of Functional Compensation for Fluid Intelligence in Healthy Ageing.
 
 This repository contains code accompanying the multivariate Bayesian machine-learning project described in the following preprint:<br>
-[Knights, E., Henson, R. N., Morcom, A. M., Mitchell, D. J., & Tsvetanov, K. A. (2023). Neural Evidence of Functional Compensation for Fluid Intelligence in Healthy Ageing. bioRxiv, 2023-09.](https://www.biorxiv.org/content/10.1101/2023.09.29.560099v1.abstract)
+[Knights, E., Henson, R. N., Morcom, A. M., Mitchell, D. J., & Tsvetanov, K. A. (2023). Neural Evidence of Functional Compensation for Fluid Intelligence in Healthy Ageing. bioRxiv, 2023-09.](https://www.biorxiv.org/content/10.1101/2023.09.29.560099v1.full)
 <br>
 <br>
 
@@ -46,7 +46,7 @@ source('plot_ROI.R') #For interaction: activation ~ age * bhv
 ### Raw data for Machine-Learning
 - For performing Multivariate Bayes and the preceding whole-brain univariate analysis (e.g. generating second-level models, defining ROIs, extracting timeseries), download the  Cattell first-level model images derived from automatic analysis (see Taylor et al. 2017 NeuroImage) by submitting a Cam-CAN data-request: <br>```https://camcan-archive.mrc-cbu.cam.ac.uk/dataaccess``` <br><br>
 ### Summary Data for Modelling
-- For hypothesis testing using R download data from the Open Science Framework (OSF).
+- For hypothesis testing using R, download data from the Open Science Framework (OSF).
 
 #### Linux/Mac
 
@@ -192,4 +192,4 @@ source('run_fMRI_MVB.R')
 
 # How to Acknowledge
 Please cite: <br>
-[Knights, E., Henson, R. N., Morcom, A. M., Mitchell, D. J., & Tsvetanov, K. A. (2023). Neural Evidence of Functional Compensation for Fluid Intelligence in Healthy Ageing. bioRxiv, 2023-09.](https://www.biorxiv.org/content/10.1101/2023.09.29.560099v1.abstract)
+[Knights, E., Henson, R. N., Morcom, A. M., Mitchell, D. J., & Tsvetanov, K. A. (2023). Neural Evidence of Functional Compensation for Fluid Intelligence in Healthy Ageing. bioRxiv, 2023-09.](https://www.biorxiv.org/content/10.1101/2023.09.29.560099v1.full)
