@@ -62,7 +62,7 @@ write.csv(as.data.frame(summary(lm_model)$coef), file=file.path(outImageDir,'reg
 
 
 #Plot lm()
-lm_model <- lm(frontal ~ Age * bhv
+lm_model <- lm(frontal ~ Age * bhv,
                data = df); summary(lm_model)
 p = plot_model(lm_model, type = "pred", terms = c("bhv", "Age [18, 54, 88]"), show.data = TRUE); p # vTert
 #formatting
