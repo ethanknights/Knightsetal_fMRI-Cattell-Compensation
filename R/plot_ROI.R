@@ -9,7 +9,7 @@ lm_model <- lm(lSPOC ~ scale(Age) * scale(bhv) + scale(Gender),
 write.csv(as.data.frame(summary(lm_model)$coef), file=file.path(outImageDir,'regression_ROI_cuneal.csv'))
 
 #Plot lm()
-lm_model <- lm(lSPOC ~ Age * bhv + scale,
+lm_model <- lm(lSPOC ~ Age * bhv,
                data = df); summary(lm_model)
 p = plot_model(lm_model, type = "pred", terms = c("bhv", "Age [18, 54, 88]"), show.data = TRUE); p # vTert
 p <- p +
