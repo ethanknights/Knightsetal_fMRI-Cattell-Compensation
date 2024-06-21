@@ -23,8 +23,8 @@ lm_model <- lm(bhv.inScanner ~ age_scale + GenderNum_scale,
                data = wide); summary(lm_model)
 write.csv(as.data.frame(summary(lm_model)$coef), file=file.path(outImageDir,'regression_bhv.csv'))
 
-idx.female = round(wide$GenderNum_scale,3) == 0.993
-idx.male = round(wide$GenderNum_scale,3) == -1.002
+idx.female = round(wide$GenderNum_scale,3) == 0.993 # val after centring!
+idx.male = round(wide$GenderNum_scale,3) == -1.002 # val after centring!
 mean(wide$bhv.inScanner[idx.female])
 mean(wide$bhv.inScanner[idx.male])
 sd(wide$bhv.inScanner[idx.female])
