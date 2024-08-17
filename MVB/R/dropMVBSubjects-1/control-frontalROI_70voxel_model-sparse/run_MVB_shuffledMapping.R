@@ -24,28 +24,57 @@ ggsave(file.path(outImageDir,'control-frontalROI_shuffledMVB.png'),
 
 
 #----- check relationship with age -----%
-extradf$age0z = df$age
+# extradf$age0z = df$age
+
+extradf$probGreater3 = as.factor(extradf$Log >= 3)
 
 lm(probGreater3 ~ age,
    data = extradf)
 
-#-- 1. does probablity of >3 change with age? --#
-extradf$probGreater3 = as.factor(extradf$Log >= 3)
+# Drop poor decoding subjects as in MVN analyses
+extradf <- extradf[extradf$probGreater3 == TRUE, ]
 
-model <- glm(formula = probGreater3  ~ age, 
-             family = binomial(logit), data = extradf)
-summary(model)
-#Get Odds ratio
-exp(coef(model))
-ci<-confint(model)
-OR <- exp(cbind(OR = coef(model), ci)); OR
-
-#Plot scatter
-plot(extradf$age,extradf$probGreater3)
-extradf$age
-extradf$probGreater3
+# #-- 1. does probablity of >3 change with age? --#
+# model <- glm(formula = probGreater3  ~ age, 
+#              family = binomial(logit), data = extradf)
+# summary(model)
+# #Get Odds ratio
+# exp(coef(model))
+# ci<-confint(model)
+# OR <- exp(cbind(OR = coef(model), ci)); OR
+# 
+# #Plot scatter
+# plot(extradf$age,extradf$probGreater3)
+# extradf$age
+# extradf$probGreater3
 
 #Plot - geom_density
-ggplot(extradf, aes(age, fill = probGreater3)) + 
-  geom_density(position='fill', alpha = 0.75,color="white", kernel = 'cosine')
+# ggplot(extradf, aes(age, fill = probGreater3)) + 
+#   geom_density(position='fill', alpha = 0.75,color="white", kernel = 'cosine')
 
+
+# --- add correlational approach for reviewer comment re. lenient multivariate
+# functional compensation criteria where an ROI could simply carry task-related
+# information (not necessarily beyond MDN task-relevant network) --- #
+
+# No need for scaling vars, before stats, since spearman is just ranking cases!
+spearman_corr <- cor(extradf$age, extradf$Log, method = "spearman")
+spearman_test <- cor.test(extradf$age, extradf$Log, method = "spearman")
+print(paste("Spearman correlation:", spearman_corr))
+print(paste("Spearman test:", spearman_test))
+
+p <- ggplot(extradf, aes(x = age, y = Log)) +
+  geom_point(shape = 21, size = 3, colour = 'black', fill = 'sienna4', stroke = 1.25) + 
+  geom_smooth(method = 'lm', se = FALSE, colour = 'sienna4', size = 2) +
+  ylim(0, 110) + 
+  scale_x_continuous(breaks = round(seq(20, max(80), by = 20), 1), limits = c(15, 90)) +
+  theme_bw() + 
+  theme(
+    panel.border = element_blank(), 
+    panel.grid.major = element_blank(), 
+    panel.grid.minor = element_blank(),
+    legend.position = 'none',
+    axis.line = element_line(colour = "black", size = 2), 
+    axis.ticks = element_line(colour = "black", size = 2),
+    text = element_text(size = 24)
+  ); p
