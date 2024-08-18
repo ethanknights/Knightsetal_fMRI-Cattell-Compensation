@@ -50,9 +50,10 @@ lm_model <- lm(scale(spread_RH) ~ scale(Age) + scale(Gender) + scale(lSPOC),
                data = df); summary(lm_model)
 
 ggplot(df, aes(x = Age, y = spread_RH)) +
-  geom_point(shape = 21, size = 3, colour = 'black', fill = 'orchid1', stroke = 1.25) +
+  geom_point(shape = 21, size = 6, colour = 'black', fill = 'orchid1', stroke = 2) +
   geom_smooth(method = 'lm', se = TRUE, colour = 'orchid1', size = 2) +
   scale_x_continuous(breaks = round(seq(20, 80, by = 20), 1), limits = c(15, 90)) +
+  ylim(0,0.225) +
   theme_bw() + 
   theme(
     panel.border = element_blank(), 

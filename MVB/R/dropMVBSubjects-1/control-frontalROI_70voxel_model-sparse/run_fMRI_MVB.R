@@ -50,9 +50,10 @@ lm_model <- lm(scale(spread_RH) ~ scale(Age) + scale(Gender) + scale(frontal),
                data = df); summary(lm_model)
 
 ggplot(df, aes(x = Age, y = spread_RH)) +
-  geom_point(shape = 21, size = 3, colour = 'black', fill = 'sienna4', stroke = 1.25) +
+  geom_point(shape = 21, size = 6, colour = 'black', fill = 'sienna4', stroke = 2) +
   geom_smooth(method = 'lm', se = TRUE, colour = 'sienna4', size = 2) +
   scale_x_continuous(breaks = round(seq(20, 80, by = 20), 1), limits = c(15, 90)) +
+  scale_y_continuous(breaks = seq(0, 0.225, by = 0.05), limits = c(0, 0.225)) +
   theme_bw() + 
   theme(
     panel.border = element_blank(), 
@@ -61,6 +62,8 @@ ggplot(df, aes(x = Age, y = spread_RH)) +
     legend.position = 'none',
     axis.line = element_line(colour = "black", size = 2), 
     axis.ticks = element_line(colour = "black", size = 2),
+    axis.text = element_text(size = 24),
+    axis.title = element_text(size = 24),
     text = element_text(size = 24)
   )
 ggsave(file.path(outImageDir,'frontalROI_Spread~Age.png'),
