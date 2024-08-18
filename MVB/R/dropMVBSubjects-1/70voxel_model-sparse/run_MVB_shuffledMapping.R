@@ -5,6 +5,7 @@ extraData <- read.csv(file.path(rawDir,"extradata_ShuffledGroupFVals.csv"), head
 t = t.test(extraData$Log, alternative = 'greater', mu = 3)
 group = rep(1,nrow(extraData))
 extradf = cbind(extraData,group)
+extradf$Gender = df_univariate$Gender
 
 t$statistic/ sqrt(nrow(df)) #cohenD
 #  ES.t.one( t = t$statistic, df = t$parameter, alternative = 'one.sided' )    #doublecheck cohenD
@@ -53,21 +54,17 @@ extradf <- extradf[extradf$probGreater3 == TRUE, ]
 # ggplot(extradf, aes(age, fill = probGreater3)) + 
 #   geom_density(position='fill', alpha = 0.75,color="white", kernel = 'cosine')
 
-
-# --- add correlational approach for reviewer comment re. lenient multivariate
+# --- add Log ~ Age approach for reviewer comment re. lenient multivariate
 # functional compensation criteria where an ROI could simply carry task-related
 # information (not necessarily beyond MDN task-relevant network) --- #
 
-# No need for scaling vars, before stats, since spearman is just ranking cases!
-spearman_corr <- cor(extradf$age, extradf$Log, method = "spearman")
-spearman_test <- cor.test(extradf$age, extradf$Log, method = "spearman")
-print(paste("Spearman correlation:", spearman_corr))
-print(paste("Spearman test:", spearman_test))
+lm_model <- lm(scale(Log) ~ scale(age) + scale(Gender),
+               data = extradf); summary(lm_model)
 
 p <- ggplot(extradf, aes(x = age, y = Log)) +
   geom_point(shape = 21, size = 3, colour = 'black', fill = 'orchid1', stroke = 1.25) + 
-  geom_smooth(method = 'lm', se = FALSE, colour = 'orchid1', size = 2) +
-  ylim(0, 110) + 
+  geom_smooth(method = 'lm', se = TRUE, colour = 'orchid1', size = 2) +
+  ylim(-5, 110) + 
   scale_x_continuous(breaks = round(seq(20, max(80), by = 20), 1), limits = c(15, 90)) +
   theme_bw() + 
   theme(
@@ -79,4 +76,5 @@ p <- ggplot(extradf, aes(x = age, y = Log)) +
     axis.ticks = element_line(colour = "black", size = 2),
     text = element_text(size = 24)
   ); p
-
+ggsave(file.path(outImageDir,'cuneallROI_Log~Age.png'),
+       width = 25, height = 25, units = 'cm', dpi = 300)
