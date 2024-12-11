@@ -1,6 +1,6 @@
 ## Knights et al. (2024). Neural Evidence of Functional Compensation for Fluid Intelligence in Healthy Ageing.
 
-This repository contains code accompanying the multivariate Bayesian machine-learning article peer reviewed in eLife:<br>
+This repository contains code accompanying the multivariate Bayesian machine-learning article published in eLife:<br>
 [Knights, E., Henson, R. N., Morcom, A. M., Mitchell, D. J., & Tsvetanov, K. A. (2024). Neural Evidence of Functional Compensation for Fluid Intelligence in Healthy Ageing. eLife. https://doi.org/10.7554/eLife.93327.1](https://elifesciences.org/reviewed-preprints/93327)
 <br>
 <br>
